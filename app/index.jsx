@@ -1,9 +1,12 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, Image, TouchableOpacity, useColorScheme } from "react-native";
 import React from "react";
 import { useFonts, Inter_400Regular, Inter_700Bold } from "@expo-google-fonts/inter";
 import { FontAwesome6 } from "@expo/vector-icons";
+import { useNavigation } from "expo-router";
 
 const Index = () => {
+  const theme = useColorScheme();
+  const navigation = useNavigation();
 	const [fontsLoaded] = useFonts({
 		Inter_400Regular,
 		Inter_700Bold,
@@ -14,55 +17,53 @@ const Index = () => {
 	}
 
 	return (
-		<View style={styles.container}>
+		<View style={[styles.container, {backgroundColor: theme === "dark" ? "#0B2B26" : "#8BB69B"}]}>
 			<Image
-				source={require("../assets/Login_illustration.jpg")}
+				source={require("../assets/Login_illustration_2.png")}
 				style={{ width: 500, height: 400, alignSelf: "center" }}
 			/>
-			<Text style={styles.welcomeText}>Welcome to Servio, your one-stop solution for all your service needs.</Text>
+			<Text style={[styles.welcomeText, {color: theme === "dark" ? "#bbbbba" : "#273d2e"}]}>Welcome to Servio, your one-stop solution for all your service needs.</Text>
 
 			<View style={styles.buttonWrapper}>
-				<TouchableOpacity>
-					<Text style={styles.loginBtn}>Login</Text>
+				<TouchableOpacity onPress={() => navigation.navigate('login')}>
+					<Text style={[styles.loginBtn, {backgroundColor: theme === "dark" ? "#8BB69B" : "#0B2B26", color: theme === "dark" ? "#273d2e" : "#fffffe"}]}>Login</Text>
 				</TouchableOpacity>
 				<TouchableOpacity>
-					<Text style={styles.signupBtn}>Sign Up</Text>
+					<Text style={[styles.signupBtn, {color: theme === "dark" ? "#fffffe" : "#0B2B26", borderColor: theme === "dark" ? "#8BB698" : "#0B2B26"}]}>Sign Up</Text>
 				</TouchableOpacity>
 			</View>
 
-			<Text style={styles.or}>Or</Text>
+			<Text style={[styles.or, {color: theme === "dark" ? "#fffffe" : "#273d2e"}]}>Or</Text>
 
 			<View>
-				<TouchableOpacity style={[styles.button, styles.googleButton]}>
-					<FontAwesome6 name="google" size={20} color="#0B2B26" />
-					<Text style={styles.buttonText}>Continue with Google</Text>
+				<TouchableOpacity style={[styles.button]}>
+					<FontAwesome6 name="google" size={20} color={theme === 'dark' ? "#8BB69B" : "#0B2B26"} />
+					<Text style={[styles.buttonText, {color: theme === "dark" ? "#aaaaa1" : "#0B2B26"}]}>Continue with Google</Text>
 				</TouchableOpacity>
 
 				<TouchableOpacity style={[styles.button, styles.xButton]}>
-					<FontAwesome6 name="x-twitter" size={20} color="#000000" />
-					<Text style={styles.buttonText}>Continue with X</Text>
+					<FontAwesome6 name="x-twitter" size={20} color={theme === 'dark' ? "#8BB69B" : "#0B2B26"} />
+					<Text style={[styles.buttonText, {color: theme === "dark" ? "#aaaaa1" : "#0B2B26"}]}>Continue with X</Text>
 				</TouchableOpacity>
 			</View>
 		</View>
 	);
 };
 
-export default Index;
-
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		alignItems: "center",
-		backgroundColor: "#fffffe",
 	},
 	welcomeText: {
 		fontSize: 18,
 		textAlign: "center",
 		fontFamily: "Inter_400Regular",
 		marginTop: 40,
-		paddingHorizontal: 20,
-    fontWeight: 'bold',
-    width: '105%'
+		paddingHorizontal: 12,
+    fontWeight: 'semibold',
+    width: '105%',
+    color: '#273d2e'
 	},
 	buttonWrapper: {
 		flexDirection: "row",
@@ -80,7 +81,6 @@ const styles = StyleSheet.create({
 		borderRadius: 25,
 	},
 	signupBtn: {
-		borderBlockColor: "#0B2B26",
 		borderWidth: 1,
 		color: "#0B2B26",
 		paddingVertical: 10,
@@ -101,9 +101,6 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 20,
 		marginTop: 20,
 	},
-	googleButton: {
-		backgroundColor: "#FFF",
-	},
   or :{
     fontWeight: 'bold',
     fontSize: 17,
@@ -111,3 +108,6 @@ const styles = StyleSheet.create({
     marginTop: 7
   }
 });
+
+export default Index;
+
