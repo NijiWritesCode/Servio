@@ -16,21 +16,21 @@ const Signup = () => {
 			contentContainerStyle={[
 				styles.scrollContainer,
 				{
-					backgroundColor: isDark ? "#0B2B26" : "#8BB69B",
+					backgroundColor: isDark ? "#0B2B26" : "#bbffd4",
 				},
 			]}>
 			<View
 				style={[
 					styles.container,
 					{
-						backgroundColor: isDark ? "#0B2B26" : "#8BB69B",
+						backgroundColor: isDark ? "#0B2B26" : "#bbffd4",
 					},
 				]}>
 				<View
 					style={[
 						styles.card,
 						{
-							backgroundColor: isDark ? "#0B2B26" : "#8BB69B",
+							backgroundColor: isDark ? "#0B2B26" : "#bbffd4",
 						},
 					]}>
 					<Text
@@ -365,9 +365,9 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 		gap: 12,
 		height: 55,
-		borderRadius: 14,
+		borderRadius: 30,
 		borderWidth: 1,
-		borderColor: "#D8E2DA",
+		borderColor: "#0B2B26",
 	},
 
 	buttonText: {
