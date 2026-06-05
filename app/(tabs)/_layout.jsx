@@ -1,10 +1,11 @@
 import React, { useEffect, useMemo, useRef } from "react";
-import { Animated, TouchableOpacity, View, useWindowDimensions } from "react-native";
+import { Animated, TouchableOpacity, View, useWindowDimensions, useColorScheme } from "react-native";
 import { Tabs } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { Colors } from "../../constants/Colors";
 
-function CustomTabBar({ state, descriptors, navigation }) {
+function CustomTabBar({ state, descriptors, navigation, colors }) {
 	const { width } = useWindowDimensions();
 	const insets = useSafeAreaInsets();
 	const tabWidth = width / state.routes.length;
@@ -35,9 +36,9 @@ function CustomTabBar({ state, descriptors, navigation }) {
 				flexDirection: "row",
 				height: 68 + insets.bottom,
 				paddingBottom: insets.bottom,
-				backgroundColor: "#FFFFFF",
+				backgroundColor: colors.cardSecondary || colors.background, // fallback
 				borderTopWidth: 1,
-				borderTopColor: "#E5E7EB",
+				borderTopColor: colors.divider,
 				position: "relative",
 				overflow: "hidden",
 			}}>
@@ -49,7 +50,7 @@ function CustomTabBar({ state, descriptors, navigation }) {
 					left: (tabWidth - 32) / 2,
 					width: 32,
 					height: 5,
-					backgroundColor: "#8BB69B",
+					backgroundColor: colors.tint,
 					borderBottomLeftRadius: 20,
 					borderBottomRightRadius: 20,
 					transform: [{ translateX }],
@@ -103,7 +104,7 @@ function CustomTabBar({ state, descriptors, navigation }) {
 						<Ionicons
 							name={iconName}
 							size={24}
-							color={focused ? "#8BB69B" : "#94A3B8"}
+							color={focused ? colors.tabIconSelected : colors.tabIconDefault}
 							style={
 								focused
 									? {
@@ -122,13 +123,16 @@ function CustomTabBar({ state, descriptors, navigation }) {
 }
 
 export default function TabsLayout() {
+	const theme = useColorScheme() ?? "light";
+	const colors = Colors[theme];
+
 	return (
 		<Tabs
 			screenOptions={{
 				headerShown: false,
 				tabBarShowLabel: false,
 			}}
-			tabBar={(props) => <CustomTabBar {...props} />}>
+			tabBar={(props) => <CustomTabBar {...props} colors={colors} />}>
 			<Tabs.Screen name="index" options={{ title: "Home" }} />
 			<Tabs.Screen name="booking" options={{ title: "Booking" }} />
 			<Tabs.Screen name="profile" options={{ title: "Profile" }} />

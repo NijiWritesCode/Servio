@@ -1,23 +1,15 @@
 import React from "react";
-import {
-	StyleSheet,
-	Text,
-	View,
-	Image,
-	TouchableOpacity,
-	useColorScheme,
-} from "react-native";
-import {
-	useFonts,
-	Inter_400Regular,
-	Inter_700Bold,
-} from "@expo-google-fonts/inter";
-import { FontAwesome6 } from "@expo/vector-icons";
+import { StyleSheet, Text, View, Image, TouchableOpacity, useColorScheme } from "react-native";
+import { useFonts, Inter_400Regular, Inter_700Bold } from "@expo-google-fonts/inter";
 import { router } from "expo-router";
 
+import SocialButton from "../components/SocialButton";
+import Divider from "../components/Divider";
+import { Colors } from "../constants/Colors";
+
 const Index = () => {
-	const theme = useColorScheme();
-	const isDark = theme === "dark";
+	const theme = useColorScheme() ?? "light";
+	const colors = Colors[theme];
 
 	const [fontsLoaded] = useFonts({
 		Inter_400Regular,
@@ -33,7 +25,7 @@ const Index = () => {
 			style={[
 				styles.container,
 				{
-					backgroundColor: isDark ? "#0B2B26" : "#BBFFD4",
+					backgroundColor: colors.background,
 				},
 			]}
 		>
@@ -48,7 +40,7 @@ const Index = () => {
 					style={[
 						styles.title,
 						{
-							color: isDark ? "#FFFFFF" : "#0B2B26",
+							color: colors.text,
 						},
 					]}
 				>
@@ -59,7 +51,7 @@ const Index = () => {
 					style={[
 						styles.subtitle,
 						{
-							color: isDark ? "#C8D5CF" : "#4A5D52",
+							color: colors.textMuted,
 						},
 					]}
 				>
@@ -74,7 +66,8 @@ const Index = () => {
 					style={[
 						styles.primaryButton,
 						{
-							backgroundColor: isDark ? "#8BB69B" : "#0B2B26",
+							backgroundColor: colors.primaryButtonBackground,
+							shadowColor: colors.shadow,
 						},
 					]}
 				>
@@ -82,7 +75,7 @@ const Index = () => {
 						style={[
 							styles.primaryButtonText,
 							{
-								color: isDark ? "#0B2B26" : "#FFFFFF",
+								color: colors.primaryButtonText,
 							},
 						]}
 					>
@@ -95,7 +88,7 @@ const Index = () => {
 					style={[
 						styles.secondaryButton,
 						{
-							borderColor: isDark ? "#8BB69B" : "#0B2B26",
+							borderColor: colors.secondaryButtonBorder,
 						},
 					]}
 				>
@@ -103,7 +96,7 @@ const Index = () => {
 						style={[
 							styles.secondaryButtonText,
 							{
-								color: isDark ? "#FFFFFF" : "#0B2B26",
+								color: colors.secondaryButtonText,
 							},
 						]}
 					>
@@ -112,89 +105,13 @@ const Index = () => {
 				</TouchableOpacity>
 			</View>
 
-			<View style={styles.dividerContainer}>
-				<View
-					style={[
-						styles.dividerLine,
-						{
-							backgroundColor: isDark ? "#365A50" : "#9AB5A4",
-						},
-					]}
-				/>
-
-				<Text
-					style={[
-						styles.dividerText,
-						{
-							color: isDark ? "#C8D5CF" : "#4A5D52",
-						},
-					]}
-				>
-					Continue with
-				</Text>
-
-				<View
-					style={[
-						styles.dividerLine,
-						{
-							backgroundColor: isDark ? "#365A50" : "#9AB5A4",
-						},
-					]}
-				/>
+			<View style={styles.dividerWrapper}>
+				<Divider text="Continue with" />
 			</View>
 
 			<View style={styles.socialContainer}>
-				<TouchableOpacity
-					style={[
-						styles.socialButton,
-						{
-							borderColor: isDark ? "#365A50" : "#0B2B26",
-						},
-					]}
-				>
-					<FontAwesome6
-						name="google"
-						size={20}
-						color={isDark ? "#8BB69B" : "#0B2B26"}
-					/>
-
-					<Text
-						style={[
-							styles.socialText,
-							{
-								color: isDark ? "#FFFFFF" : "#0B2B26",
-							},
-						]}
-					>
-						Continue with Google
-					</Text>
-				</TouchableOpacity>
-
-				<TouchableOpacity
-					style={[
-						styles.socialButton,
-						{
-							borderColor: isDark ? "#365A50" : "#0B2B26",
-						},
-					]}
-				>
-					<FontAwesome6
-						name="x-twitter"
-						size={20}
-						color={isDark ? "#8BB69B" : "#0B2B26"}
-					/>
-
-					<Text
-						style={[
-							styles.socialText,
-							{
-								color: isDark ? "#FFFFFF" : "#0B2B26",
-							},
-						]}
-					>
-						Continue with X
-					</Text>
-				</TouchableOpacity>
+				<SocialButton title="Continue with Google" iconName="google" />
+				<SocialButton title="Continue with X" iconName="x-twitter" />
 			</View>
 		</View>
 	);
@@ -209,23 +126,19 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 24,
 		justifyContent: "center",
 	},
-
 	illustration: {
 		width: "100%",
 		height: 280,
 	},
-
 	textContainer: {
 		alignItems: "center",
 		marginTop: 8,
 	},
-
 	title: {
 		fontSize: 34,
 		fontFamily: "Inter_700Bold",
 		textAlign: "center",
 	},
-
 	subtitle: {
 		fontSize: 16,
 		fontFamily: "Inter_400Regular",
@@ -234,35 +147,26 @@ const styles = StyleSheet.create({
 		marginTop: 12,
 		maxWidth: 320,
 	},
-
 	buttonWrapper: {
 		flexDirection: "row",
 		gap: 16,
 		marginTop: 36,
 	},
-
 	primaryButton: {
 		width: 140,
 		height: 52,
 		borderRadius: 26,
 		justifyContent: "center",
 		alignItems: "center",
-
-		shadowColor: "#000",
-		shadowOffset: {
-			width: 0,
-			height: 4,
-		},
+		shadowOffset: { width: 0, height: 4 },
 		shadowOpacity: 0.1,
 		shadowRadius: 8,
 		elevation: 4,
 	},
-
 	primaryButtonText: {
 		fontSize: 16,
 		fontFamily: "Inter_700Bold",
 	},
-
 	secondaryButton: {
 		width: 140,
 		height: 52,
@@ -271,48 +175,15 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 		alignItems: "center",
 	},
-
 	secondaryButtonText: {
 		fontSize: 16,
 		fontFamily: "Inter_700Bold",
 	},
-
-	dividerContainer: {
-		flexDirection: "row",
-		alignItems: "center",
+	dividerWrapper: {
 		width: "100%",
-		marginTop: 36,
 	},
-
-	dividerLine: {
-		flex: 1,
-		height: 1,
-	},
-
-	dividerText: {
-		marginHorizontal: 12,
-		fontSize: 14,
-		fontFamily: "Inter_400Regular",
-	},
-
 	socialContainer: {
 		width: "100%",
-		marginTop: 24,
 		gap: 14,
-	},
-
-	socialButton: {
-		height: 56,
-		borderRadius: 18,
-		borderWidth: 1,
-		flexDirection: "row",
-		alignItems: "center",
-		justifyContent: "center",
-		gap: 12,
-	},
-
-	socialText: {
-		fontSize: 15,
-		fontFamily: "Inter_700Bold",
 	},
 });

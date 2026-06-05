@@ -1,0 +1,50 @@
+const tintColorLight = '#0B2B26';
+const tintColorDark = '#8BB69B';
+
+export const Colors = {
+  light: {
+    background: '#BBFFD4',
+    card: '#BBFFD4',
+    text: '#273D2E',
+    textSecondary: '#5C6B63',
+    textMuted: '#4A5D52',
+    tint: tintColorLight,
+    inputBackground: '#F4F7F4',
+    inputBorder: '#D8E2DA',
+    placeholder: '#7D8B84',
+    primaryButtonBackground: '#0B2B26',
+    primaryButtonText: '#FFFFFF',
+    secondaryButtonBorder: '#0B2B26',
+    secondaryButtonText: '#0B2B26',
+    socialButtonBorder: '#0B2B26',
+    socialButtonText: '#0B2B26',
+    link: '#0B2B26',
+    divider: '#D8E2DA',
+    tabIconDefault: '#94A3B8',
+    tabIconSelected: tintColorLight,
+    shadow: '#000',
+  },
+  dark: {
+    background: '#0B2B26',
+    card: '#16352F', // Used in forgotPassword card
+    cardSecondary: '#0B2B26', // Used in login/signup card
+    text: '#FFFFFF',
+    textSecondary: '#A8B3AF',
+    textMuted: '#C8D5CF',
+    tint: tintColorDark,
+    inputBackground: '#235347',
+    inputBorder: '#365A50',
+    placeholder: '#9CA3AF',
+    primaryButtonBackground: '#8BB69B',
+    primaryButtonText: '#0B2B26',
+    secondaryButtonBorder: '#8BB69B',
+    secondaryButtonText: '#FFFFFF',
+    socialButtonBorder: '#365A50',
+    socialButtonText: '#E5E7EB',
+    link: '#8BB69B',
+    divider: '#365A50',
+    tabIconDefault: '#94A3B8',
+    tabIconSelected: tintColorDark,
+    shadow: '#000',
+  },
+};
